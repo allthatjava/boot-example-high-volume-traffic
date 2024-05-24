@@ -4,7 +4,8 @@
 2. [Use @Cacheable](#Cacheable)
 3. [Use Compression](#Compression)
 
-## <a name="AsyncExample"></a> Use @Async
+<a name="AsyncExample"></a>
+## Use @Async
 * Async Test URL: `http://localhost:8080/async`
 * Sync Test URL: `http://localhost:8080/sync`  
 To improve `@Async` performance, additional ThreadPool configuration is required
@@ -38,7 +39,8 @@ The result is clear. Using `@Async` service provides consistent response time un
 #### Async Service
 ![img/async_on_result.pn](img/async_on_result.png)
 
-## <a name="Cacheable"></a> Use @Cacheable 
+<a name="Cacheable"></a>
+## Use @Cacheable 
 * Test URL: `http://localhost:8080/cached`  
 Calls the following Service component with `@Cacheable` annotation
 ```java
@@ -67,7 +69,8 @@ __Note__: This is local machine test, so it cannot measure as standard result
 
 __Result__: You will see latency drops down dramatically after a few hundred requests. It needs to pass a few hundreds request because of Thread.sleep setting.
 
-## <a name="Compression"></a> Use Compression 
+<a name="Compression"></a>
+## Use Compression 
 * Test URL: `http://localhost:8080/compressed`
 
 Add following configuration in application.yml
