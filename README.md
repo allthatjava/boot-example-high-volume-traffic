@@ -1,5 +1,4 @@
-# How to handle high volume traffic in Spring Boot examples
-
+# A few examples of how to handle high volume traffic in Spring Boot
 1. [Use @Async](#AsyncExample)
 2. [Use @Cacheable](#Cacheable)
 3. [Use Compression](#Compression)
@@ -24,8 +23,18 @@ public class AsyncConfig {
     }
 }
 ```
+* Use `CompletableFuture<~>` return type for `@Async` method
+```java
+@Service
+public class AsyncService {
+    @Async("taskExecutor")
+    public CompletableFuture<String> asyncHello() {
+        return CompletableFuture.completedFuture("Hello from Async service");
+    }
+}
+```
 * Also need to annotate the configuration class with `@EnableAsync`
-* Use `CompletableFuture<~>` return type for `@Async` method 
+
 
 ### Test result - Jmeter
 * Number of Threads (users): 5000
@@ -60,6 +69,15 @@ public class CachedService {
     }
 }
 ```
+* Also need to add `@EnableCaching` annotation on configuration class
+* Following configuration must be added in application.yml file
+```yaml
+spring:
+  cache:
+    type: simple
+    cache-names:        # This 'cache-names' can limit the name spaces for Cache. If this property doesn't exist, it will allow all. If it exists, only the listed names will be allowed to cache
+    - cached-single
+```
 
 ### Test environment - Jmeter
 __Note__: This is local machine test, so it cannot measure as standard result
@@ -67,7 +85,7 @@ __Note__: This is local machine test, so it cannot measure as standard result
 * Ramp-up period(seconds): 10
 * Loop Count: 1
 
-__Result__: You will see latency drops down dramatically after a few hundred requests. It needs to pass a few hundreds request because of Thread.sleep setting.
+__Result__: You will see latency drops down dramatically after a few hundred requests. It needs to pass a few hundreds request because of `Thread.sleep` setting.
 
 <a name="Compression"></a>
 ## Use Compression 
@@ -87,4 +105,4 @@ You will see the response body `Bytes` size difference
 ![img/compressed_on_response_header_result.png](img/compressed_on_response_header_result.png)
 ![img/compressed_on_result.png](img/compressed_on_result.png)
 * Result without header `Accept-Encoding: gzip` on
-  ![img/compressed_off_result.png](img/compressed_off_result.png)
+![img/compressed_off_result.png](img/compressed_off_result.png)
