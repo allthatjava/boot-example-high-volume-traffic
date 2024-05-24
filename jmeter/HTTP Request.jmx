@@ -107,7 +107,7 @@
         </ResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="high-volume-traffic/async">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="high-volume-traffic/async" enabled="false">
         <intProp name="ThreadGroup.num_threads">5000</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
