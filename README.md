@@ -2,6 +2,7 @@
 1. [Use @Async](#AsyncExample)
 2. [Use @Cacheable](#Cacheable)
 3. [Use Compression](#Compression)
+4. [Other Options](#OtherOptions)
 
 <a name="AsyncExample"></a>
 ## Use @Async
@@ -106,3 +107,12 @@ You will see the response body `Bytes` size difference
 ![img/compressed_on_result.png](img/compressed_on_result.png)
 * Result without header `Accept-Encoding: gzip` on
 ![img/compressed_off_result.png](img/compressed_off_result.png)
+
+<a name="OtherOptions"></a>
+## Other Options
+### Paginate Returning result
+Use `Pageable` option when getting the data from Database
+### Optimize Database Connection Pool
+Set the hikari database connection pool to optimize the DB connection
+### Use Actuator to check the performance/status
+`localhost:8080/actuator/metrics` has a list of measurable end point such as `localhost:8080/actuator/metrics/jvm.memory.used` is showing how much memory has been used by JVM.
